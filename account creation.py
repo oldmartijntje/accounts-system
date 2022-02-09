@@ -94,7 +94,18 @@ if appName not in dictionary:#if the user hasn't played before
 else:
     print(dictionary[appName])#prints your data, just to show you how it works
 
+
+#this is your game data, for easy use. but you can also just access your gamedata without this
+gameData = dictionary[appName]
+
+
+#use this line if you edited the gamedata before the closeAccount(), if you didn't edit the gamedata, you can skip it
+dictionary[appName] = gameData 
+
 #close the account correctly (so it won't get corrupted), use this where you need it, and save it here as a comment
 closeAccount(name, list1, data)
+
+
+
 
 #code:
