@@ -18,6 +18,8 @@ else:#create config
         config['DEFAULT'] = {'#don\'t change the file-extention if you are not sure of what it is' : None,
             'fileExtention' : 'mcld'}
         if os.path.isdir(folder):#check if the inputted folder exists
+            if folder[len(folder)-1] != '/' and folder[len(folder)-1] != '\\':
+                folder += '\\'
             config['User'] = {'SaveFileFolder' : folder,'AutoLogin' : 'False', 'AccountName' : 'testaccount'}
         else:
             config['User'] = {'SaveFileFolder' : 'accounts/','AutoLogin' : 'False', 'AccountName' : 'testaccount'}
