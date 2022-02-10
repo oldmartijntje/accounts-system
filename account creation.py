@@ -55,6 +55,19 @@ def fixData(data):#remove encryption
     data[1] = data[1] - data[0]
     return data
 
+def loadAccount():
+    if checkSave(pickle.load( open(f'{path}{search}.{fileExtention}', "rb" ))) == True: #check if it is not corrupted (in my encryption)
+        try:
+            name, list1, appDataDict, num1, num2, data1, data2, data3, achievements, collectables= pickle.load( open(f'{path}{search.lower()}.{fileExtention}', "rb" )) #load the account
+        except:
+            name, list1, appDataDict, num1, num2, data1, data2, data3 = pickle.load( open(f'{path}{search.lower()}.{fileExtention}', "rb" )) #load old variant of account
+            achievements = {}
+            collectables = {}
+        startTime = datetime.datetime.now()#start counting how long you are using the program
+        data = fixData(data3)#decrypt data
+    return name, list1, appDataDict, num1, num2, data1, data2, data3, achievements, collectables, startTime, data
+
+
 def closeAccount(name, list1, data1):#close the account
     def scrambleData(data,num1,num2,key, num):
         data[0] = key + ((num1 * num2) * num)#add encryption
@@ -79,7 +92,7 @@ def stringToSeed(seedString): #turns everything into ther ASCII value
     return seed
 
 #for easy loading and testing the account, you can enable this in the config
-if autoLogin == 'True':
+if autoLogin.lower() == 'true':
     search = autoLoginName
 else:
     search = input('please give username\n>')
@@ -87,15 +100,7 @@ else:
 
 if os.path.exists(f'{path}{search.lower()}.{fileExtention}'):#check if account exists
     print('user found')
-    if checkSave(pickle.load( open(f'{path}{search}.{fileExtention}', "rb" ))) == True: #check if it is not corrupted (in my encryption)
-        try:
-            name, list1, appDataDict, num1, num2, data1, data2, data3, achievements, collectables= pickle.load( open(f'{path}{search.lower()}.{fileExtention}', "rb" )) #load the account
-        except:
-            name, list1, appDataDict, num1, num2, data1, data2, data3 = pickle.load( open(f'{path}{search.lower()}.{fileExtention}', "rb" )) #load old variant of account
-            achievements = {}
-            collectables = {}
-        startTime = datetime.datetime.now()#start counting how long you are using the program
-        data = fixData(data3)#decrypt data
+    name, list1, appDataDict, num1, num2, data1, data2, data3, achievements, collectables, startTime, data = loadAccount()
         
 else:
     while True:
