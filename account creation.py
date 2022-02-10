@@ -1,28 +1,46 @@
-#[name,[time],{appDictionary},randint1,randint2,[data with lock += 2 randints],[dataHistory],[data with lock without 2 randints]]
+#old variant: [name,[time],{appDictionary},randint1,randint2,[data with lock += 2 randints],[dataHistory],[data with lock without 2 randints]]
+#new variant: [name,[time],{appDictionary},randint1,randint2,[data with lock += 2 randints],[dataHistory],[data with lock without 2 randints]], {achievements}, {collectables}
+
 import pickle
 import os
 import datetime
 import random
 import configparser
 
-if os.path.isfile("config.ini"):#read config if it exists
+
+if os.path.isfile("systemConfig.ini"):#read config if it exists
     config = configparser.ConfigParser()
-    config.read('config.ini')
+    config.read('systemConfig.ini')
 else:#create config
-    with open('config.ini', 'w') as configfile:
+    with open('systemConfig.ini', 'w') as configfile:
         config = configparser.ConfigParser(allow_no_value=True)
-        config['DEFAULT'] = {'SaveFileFolder' : 'accounts/','#don\'t change the file-extention if you are not sure of what it is' : None,
+        folder = input('do you have a specific folder where you want to store account data?\nimport the path, or not\n>')
+        config['DEFAULT'] = {'#don\'t change the file-extention if you are not sure of what it is' : None,
             'fileExtention' : 'mcld'}
+        if os.path.isdir(folder):#check if the inputted folder exists
+            config['User'] = {'SaveFileFolder' : folder,'AutoLogin' : 'False', 'AccountName' : 'testaccount'}
+        else:
+            config['User'] = {'SaveFileFolder' : 'accounts/','AutoLogin' : 'False', 'AccountName' : 'testaccount'}
+            try:
+                os.mkdir('accounts/')
+            except:
+                pass
         config.write(configfile)
+        print('we created systemConfig.ini, this contains configurations for the account system, change the [User] section at any time')
 
 #load config data
-path = config['DEFAULT']['SaveFileFolder']
 fileExtention = config['DEFAULT']['fileExtention']
+path = config['User']['SaveFileFolder']
+autoLogin = config['User']['AutoLogin']
+autoLoginName = config['User']['AccountName']
 
 def checkSave(pickledData):#check if account is corrupted
     def corruptedAccount():#what to do when account is corrupted
         exit()
-    name, list1, dictionary, num1, num2, data1, data2, data3 = pickledData
+    try:
+        name, list1, dictionary, num1, num2, data1, data2, data3, achievements, collectables = pickledData
+    except:
+        name, list1, dictionary, num1, num2, data1, data2, data3 = pickledData
     if data3[1] - data3[0] != data1[1] - data1[0] or data1[0] != data3[0] + (num1 * num2):#check if decryption is possible
         input('Account Data Corrupted, Please find a way to fix it or create a new one')
         corruptedAccount()
@@ -48,7 +66,7 @@ def closeAccount(name, list1, data1):#close the account
     key = random.randint(0,10000)#masterKey
     #this was used when the data is still encrypted, but if it's decrypted, keep this a comment:
     #data1 = fixData(data1)
-    pickle.dump([name, list1, dictionary, num1, num2, scrambleData(list(data1),num1,num2,key,1), scrambleData(list(data1),num1,num2,key,2), scrambleData(list(data1),num1,num2,key,0)], open(f'{path}{name}.{fileExtention}', "wb" ) )
+    pickle.dump([name, list1, dictionary, num1, num2, scrambleData(list(data1),num1,num2,key,1), scrambleData(list(data1),num1,num2,key,2), scrambleData(list(data1),num1,num2,key,0), achievements, collectables] , open(f'{path}{name}.{fileExtention}', "wb" ) )
 
 def stringToSeed(seedString): #turns everything into ther ASCII value
     seedList = []
@@ -58,14 +76,22 @@ def stringToSeed(seedString): #turns everything into ther ASCII value
     seed = int(seedString)
     return seed
 
-#for easy loading and testing the account
-search = input('please give username\n>>>')
-#search = 'testAccount'#you can use this to skip the input for testing your code
+#for easy loading and testing the account, you can enable this in the config
+if autoLogin == 'True':
+    search = autoLoginName
+else:
+    search = input('please give username\n>')
+
 
 if os.path.exists(f'{path}{search.lower()}.{fileExtention}'):#check if account exists
     print('user found')
     if checkSave(pickle.load( open(f'{path}{search}.{fileExtention}', "rb" ))) == True: #check if it is not corrupted (in my encryption)
-        name, list1, dictionary, num1, num2, data1, data2, data3 = pickle.load( open(f'{path}{search.lower()}.{fileExtention}', "rb" )) #load the account
+        try:
+            name, list1, dictionary, num1, num2, data1, data2, data3, achievements, collectables= pickle.load( open(f'{path}{search.lower()}.{fileExtention}', "rb" )) #load the account
+        except:
+            name, list1, dictionary, num1, num2, data1, data2, data3 = pickle.load( open(f'{path}{search.lower()}.{fileExtention}', "rb" )) #load old variant of account
+            achievements = {}
+            collectables = {}
         startTime = datetime.datetime.now()#start counting how long you are using the program
         data = fixData(data3)#decrypt data
         
@@ -75,11 +101,11 @@ else:
 
         #for easy loading and testing the account
         #answer = 'y'#you can use this to skip the input for testing your code
-        answer = input()
+        answer = input('you will be logged out afterwards\n>')
 
         match answer.lower(): #select chosen difficulty
             case 'y': #create account
-                pickle.dump([search.lower(), [0], {}, 69, 420, [41325, 41325], [41325, 41325], [12345, 12345]], open(f'{path}{search.lower()}.{fileExtention}', "wb" ) )
+                pickle.dump([search.lower(), [0], {}, 69, 420, [41325, 41325], [41325, 41325], [12345, 12345], {}, {}], open(f'{path}{search.lower()}.{fileExtention}', "wb" ) )
                 exit()
             case 'n':
                 exit()
@@ -97,7 +123,7 @@ else:
 
 #this is your game data, for easy use. but you can also just access your gamedata without this
 gameData = dictionary[appName]
-
+#it works the same with the collectables and achievements dictionaries as with the account data dict
 
 #use this line if you edited the gamedata before the closeAccount(), if you didn't edit the gamedata, you can skip it
 dictionary[appName] = gameData 
