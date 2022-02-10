@@ -68,7 +68,7 @@ def closeAccount(name, list1, data1):#close the account
     key = random.randint(0,10000)#masterKey
     #this was used when the data is still encrypted, but if it's decrypted, keep this a comment:
     #data1 = fixData(data1)
-    pickle.dump([name, list1, dictionary, num1, num2, scrambleData(list(data1),num1,num2,key,1), scrambleData(list(data1),num1,num2,key,2), scrambleData(list(data1),num1,num2,key,0), achievements, collectables] , open(f'{path}{name}.{fileExtention}', "wb" ) )
+    pickle.dump([name, list1, appDataDict, num1, num2, scrambleData(list(data1),num1,num2,key,1), scrambleData(list(data1),num1,num2,key,2), scrambleData(list(data1),num1,num2,key,0), achievements, collectables] , open(f'{path}{name}.{fileExtention}', "wb" ) )
 
 def stringToSeed(seedString): #turns everything into ther ASCII value
     seedList = []
@@ -89,9 +89,9 @@ if os.path.exists(f'{path}{search.lower()}.{fileExtention}'):#check if account e
     print('user found')
     if checkSave(pickle.load( open(f'{path}{search}.{fileExtention}', "rb" ))) == True: #check if it is not corrupted (in my encryption)
         try:
-            name, list1, dictionary, num1, num2, data1, data2, data3, achievements, collectables= pickle.load( open(f'{path}{search.lower()}.{fileExtention}', "rb" )) #load the account
+            name, list1, appDataDict, num1, num2, data1, data2, data3, achievements, collectables= pickle.load( open(f'{path}{search.lower()}.{fileExtention}', "rb" )) #load the account
         except:
-            name, list1, dictionary, num1, num2, data1, data2, data3 = pickle.load( open(f'{path}{search.lower()}.{fileExtention}', "rb" )) #load old variant of account
+            name, list1, appDataDict, num1, num2, data1, data2, data3 = pickle.load( open(f'{path}{search.lower()}.{fileExtention}', "rb" )) #load old variant of account
             achievements = {}
             collectables = {}
         startTime = datetime.datetime.now()#start counting how long you are using the program
@@ -117,18 +117,18 @@ else:
 #change this to your app their name
 appName = 'yourAppName'
 
-if appName not in dictionary:#if the user hasn't played before
-    dictionary[appName] = ['this List contains all your app data', 'don\'t keep this, here should be your data a player should have on it\'s first launch', 69, 'you have opened a default app once, wow']
+if appName not in appDataDict:#if the user hasn't played before
+    appDataDict[appName] = ['this List contains all your app data', 'don\'t keep this, here should be your data a player should have on it\'s first launch', 69, 'you have opened a default app once, wow']
 else:
-    print(dictionary[appName])#prints your data, just to show you how it works
+    print(appDataDict[appName])#prints your data, just to show you how it works
 
 
 #this is your game data, for easy use. but you can also just access your gamedata without this
-gameData = dictionary[appName]
+appData = appDataDict[appName]
 #it works the same with the collectables and achievements dictionaries as with the account data dict
 
 #use this line if you edited the gamedata before the closeAccount(), if you didn't edit the gamedata, you can skip it
-dictionary[appName] = gameData 
+appDataDict[appName] = appData 
 
 #close the account correctly (so it won't get corrupted), use this where you need it, and save it here as a comment
 closeAccount(name, list1, data)
