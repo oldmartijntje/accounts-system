@@ -110,8 +110,8 @@ else:
         #answer = 'y'#you can use this to skip the input for testing your code
         answer = input('you will be logged out afterwards\n>')
         if answer.lower() == 'y':
-                pickle.dump([search.lower(), [0], {}, 69, 420, [41325, 41325], [41325, 41325], [12345, 12345], {}, {}], open(f'{path}{search.lower()}.{fileExtention}', "wb" ) )
-                exit()
+            pickle.dump([search.lower(), [0], {}, 69, 420, [41325, 41325], [41325, 41325], [12345, 12345], {}, {}], open(f'{path}{search.lower()}.{fileExtention}', "wb" ) )
+            exit()
         elif answer.lower() == 'n':
             exit()
 
