@@ -109,13 +109,11 @@ else:
         #for easy loading and testing the account
         #answer = 'y'#you can use this to skip the input for testing your code
         answer = input('you will be logged out afterwards\n>')
-
-        match answer.lower(): #select chosen difficulty
-            case 'y': #create account
+        if answer.lower() == 'y':
                 pickle.dump([search.lower(), [0], {}, 69, 420, [41325, 41325], [41325, 41325], [12345, 12345], {}, {}], open(f'{path}{search.lower()}.{fileExtention}', "wb" ) )
                 exit()
-            case 'n':
-                exit()
+        elif answer.lower() == 'n':
+            exit()
 
 
 #use the dictonary for app related files, like for example rebirths or amounts of diamonds
