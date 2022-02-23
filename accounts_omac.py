@@ -94,43 +94,65 @@ def checkForAccount(accountName = 'testaccount', configSettings = ['accounts/', 
     else:
         return False
 
+def checkName(name):
+    import string
+    name = name.replace(" ", "")
+    for character in string.punctuation:
+        name = name.replace(character, '')
+    return name
+
 def askAccountNameConsole(configSettings = ['accounts/', 'False', 'testaccount', '_omac']):
     '''simply asks input for an account name (console app), returns account name'''
-    import string
     path, autoLogin, autoLoginName, fileExtention = configSettings
     #for the autologin
     if autoLogin.lower() == 'true':
         username = autoLoginName
     else:
         username = ''
-        while username == '':
-            if autoLogin.lower() != 'true':
-                username = input('please give username\n>')
-            username = username.replace(" ", "")
-            for character in string.punctuation:
-                username = username.replace(character, '')
+        while username == '':  
+            username = input('please give username\n>')
+            username = checkName(username)
     
     return username
 
-def askAccountNameTkinter():
+def askAccountNameTkinter(configSettings = ['accounts/', 'False', 'testaccount', '_omac']):
+    '''input the account name (tkinter), returns account name'''
     import tkinter
-    window = tkinter.Tk()
-    name=tkinter.StringVar()
-    name.set('exampleName')
-    tkinter.Label(text = 'input your name here').pack()
-    nameEntry = tkinter.Entry(window,textvariable = name, font=('calibre',10,'normal'))
-    nameEntry.pack()
-    window.mainloop()
+    def click():
+        username = checkName(nameVar.get())
+        if username != '':
+            window.destroy()
+    path, autoLogin, autoLoginName, fileExtention = configSettings
+    if autoLogin.lower() == 'true':
+        username = autoLoginName
+    else:
+        window = tkinter.Tk()
+        nameVar=tkinter.StringVar()
+        nameVar.set('exampleName')
+        tkinter.Label(text = 'input your name here').pack()
+        nameEntry = tkinter.Entry(window,textvariable = nameVar, font=('calibre',10,'normal'))
+        nameEntry.pack()
+        button = tkinter.Button(window, text = 'click me when you chose your name', command = lambda: click()).pack()
+        window.mainloop()
+        username = checkName(nameVar.get())
+    return username
 
-
-
-def createConfirmation():
+def createConfirmationConsole():
     '''simply asks user (console app) if they want to create the account, returns True or False'''
     answer = 0
     print('account doesn\'t exist, should i create it? (Y/N)')
     while answer != 'y' and answer != 'n':
         answer = input().lower()
     if answer == 'y':
+        return True
+    else:
+        return False
+
+def createConfirmationTkinter():
+    '''simply asks user (Tkinter) if they want to create the account, returns True or False'''
+    import tkinter
+    import tkinter.messagebox
+    if tkinter.messagebox.askokcancel("POPUP", "Doesn\'t exists, should we create this account?"):
         return True
     else:
         return False
@@ -142,7 +164,16 @@ class defaultConfigurations:
         if checkForAccount(account, configSettings):
             return loadAccount(account, configSettings)
         else:
-            if createConfirmation():
+            if createConfirmationConsole():
                 return createAccount(account, configSettings)
 
-askAccountNameTkinter()
+    def defaultLoadingTkinter(configSettings = ['accounts/', 'False', 'testaccount', '_omac']):
+        '''The default loading system without your configuration, using tkinter'''
+        account = askAccountNameTkinter(configSettings)
+        if checkForAccount(account, configSettings):
+            return loadAccount(account, configSettings)
+        else:
+            if createConfirmationTkinter():
+                return createAccount(account, configSettings)
+
+
