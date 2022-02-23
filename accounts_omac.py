@@ -1,4 +1,5 @@
 version = '1.0.0'
+#code made by OldMartijntje
 
 def configFileConsole():
     '''creates or reads config file (consoleApp)'''
@@ -112,7 +113,14 @@ def askAccountNameConsole(configSettings = ['accounts/', 'False', 'testaccount',
     return username
 
 def askAccountNameTkinter():
-    pass
+    import tkinter
+    window = tkinter.Tk()
+    name=tkinter.StringVar()
+    name.set('exampleName')
+    tkinter.Label(text = 'input your name here').pack()
+    nameEntry = tkinter.Entry(window,textvariable = name, font=('calibre',10,'normal'))
+    nameEntry.pack()
+    window.mainloop()
 
 
 
@@ -137,3 +145,4 @@ class defaultConfigurations:
             if createConfirmation():
                 return createAccount(account, configSettings)
 
+askAccountNameTkinter()
