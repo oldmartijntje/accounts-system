@@ -1,4 +1,4 @@
-version = '1.0.0'
+version = '2.0.0'
 #code made by OldMartijntje
 
 def configFileConsole():
@@ -94,7 +94,8 @@ def checkForAccount(accountName = 'testaccount', configSettings = ['accounts/', 
     else:
         return False
 
-def checkName(name):
+def removeCharacters(name):
+    '''this only keeps numbers and letters in the string you provde'''
     import string
     name = name.replace(" ", "")
     for character in string.punctuation:
@@ -111,7 +112,7 @@ def askAccountNameConsole(configSettings = ['accounts/', 'False', 'testaccount',
         username = ''
         while username == '':  
             username = input('please give username\n>')
-            username = checkName(username)
+            username = removeCharacters(username)
     
     return username
 
@@ -119,7 +120,7 @@ def askAccountNameTkinter(configSettings = ['accounts/', 'False', 'testaccount',
     '''input the account name (tkinter), returns account name'''
     import tkinter
     def click():
-        username = checkName(nameVar.get())
+        username = removeCharacters(nameVar.get())
         if username != '':
             window.destroy()
     path, autoLogin, autoLoginName, fileExtention = configSettings
@@ -134,7 +135,7 @@ def askAccountNameTkinter(configSettings = ['accounts/', 'False', 'testaccount',
         nameEntry.pack()
         button = tkinter.Button(window, text = 'click me when you chose your name', command = lambda: click()).pack()
         window.mainloop()
-        username = checkName(nameVar.get())
+        username = removeCharacters(nameVar.get())
     return username
 
 def createConfirmationConsole():
@@ -156,6 +157,24 @@ def createConfirmationTkinter():
         return True
     else:
         return False
+
+def createAppData(data, appID):
+    '''creates empty folders for you to use'''
+    if appID not in data['appdata']:
+        data['appdata'][appID] = []
+    if appID not in data['collectables']:
+        data['collectables'][appID] = []
+    if appID not in data['achievements']:
+        data['achievements'][appID] = []
+    return data
+
+
+
+
+
+
+
+
 
 class defaultConfigurations:
     def defaultLoadingConsole(configSettings = ['accounts/', 'False', 'testaccount', '_omac']):
