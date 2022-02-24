@@ -103,3 +103,11 @@ these keys, it creates them. So you can add data to your apps.
 I also made some easy functions. To use any of these functions, you have to put 'accounts_omac.defaultConfigurations.' infront of 
 it, like this: accounts_omac.defaultConfigurations.defaultLoadingConsole()
 These are the functions: 1.defaultLoadingConsole 2.defaultLoadingTkinter
+
+### 1.defaultLoadingConsole:
+This is a function you can call to use the account when you don't want to customize anything. It runs the other commands by himself. It will ask u 
+for a username. It will create it if it doesn't exits, atleast if you want it to create an account. If you tell it not to create an account, it 
+will return False. Otherwise it will return the account data.
+
+### 2.defaultLoadingTkinter:
+This is a function you can call to use the account (in tkinter) when you don't want to customize anything. It runs the other commands by himself. It will ask u for a username. It will create it if it doesn't exits, atleast if you want it to create an account. If you tell it not to create an account, it will return False. Otherwise it will return the account data.

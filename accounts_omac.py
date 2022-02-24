@@ -160,7 +160,7 @@ def questionTkinter(question = 'account doesn\'t exist, should i create it?', ti
         return False
 
 def createAppData(data, appID):
-    '''creates empty folders for you to use'''
+    '''creates empty errays for you to use in the dicts'''
     if appID not in data['appdata']:
         data['appdata'][appID] = []
     if appID not in data['collectables']:
@@ -168,13 +168,6 @@ def createAppData(data, appID):
     if appID not in data['achievements']:
         data['achievements'][appID] = []
     return data
-
-
-
-
-
-
-
 
 
 class defaultConfigurations:
