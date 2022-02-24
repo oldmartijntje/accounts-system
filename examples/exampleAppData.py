@@ -1,7 +1,8 @@
 import accounts_omac
 configSettings = accounts_omac.configFileConsole()
 data = accounts_omac.defaultConfigurations.defaultLoadingConsole(configSettings)
-
+if data == False:
+    exit()
 
 appIDorName = 'yourExampleAppNameID1234'
 

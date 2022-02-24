@@ -43,8 +43,8 @@ break the Time stored on your account
 # The built in functions:
 There are a lot of built in functions, here we have the normal functions:
 1.configFileConsole 2.loadAccount 3.createAccount 4.saveAccount 5.checkForAccount 6.removeCharacters 7.askAccountNameConsole 
-8.askAccountNameTkinter 9.createConfirmationConsole 10.createConfirmationTkinter 11.createAppData
-To use any function, you have to put 'accounts_omac.' infront of it, like this:
+8.askAccountNameTkinter 9.questionConsole 10.questionTkinter 11.createAppData
+To use any of these functions, you have to put 'accounts_omac.' infront of it, like this:
 accounts_omac.configFileConsole()
 
 ### 1.configFileConsole:
@@ -87,3 +87,19 @@ This is the same as askAccountNameConsole() except for the fact that it uses tki
 It takes 4 arguments: the config settings, The text on the button, The text on the label, the exampleName. If you only provide 
 the settings, it will still work since the last 3 aren't neccasery. It returns the username.
 
+### 9.questionConsole:
+This function asks the user a question. Returns True or False, depending on of they answered with Y or N. Takes 1 argument:
+The question. Default question is account creation question.
+
+### 10.questionTkinter:
+This function asks the user a question in a tkinter window. Returns True or False, depending on of they answered with Y or N. 
+Takes 2 arguments: The question and the popup title. Default question is account creation question.
+
+### 11.createAppData:
+This checks if the app already has it's own key in the 3 dicts(appdata, achievements, collectables). And when it doesn't have 
+these keys, it creates them. So you can add data to your apps.
+
+# Easy functions:
+I also made some easy functions. To use any of these functions, you have to put 'accounts_omac.defaultConfigurations.' infront of 
+it, like this: accounts_omac.defaultConfigurations.defaultLoadingConsole()
+These are the functions: 1.defaultLoadingConsole 2.defaultLoadingTkinter

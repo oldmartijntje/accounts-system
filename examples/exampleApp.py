@@ -8,8 +8,10 @@ account = accounts_omac.askAccountNameConsole(configSettings)
 if accounts_omac.checkForAccount(account, configSettings):
     data = accounts_omac.loadAccount(account, configSettings)
 else:
-    if accounts_omac.createConfirmationConsole():
+    if accounts_omac.questionConsole():
         data = accounts_omac.createAccount(account, configSettings)
+    else:
+        exit()
 
 
 #some functions that might be usefull

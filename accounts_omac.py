@@ -139,10 +139,10 @@ def askAccountNameTkinter(configSettings = ['accounts/', 'False', 'testaccount',
         username = removeCharacters(nameVar.get())
     return username
 
-def createConfirmationConsole():
-    '''simply asks user (console app) if they want to create the account, returns True or False'''
+def questionConsole(question = 'account doesn\'t exist, should i create it?'):
+    '''simply asks user (console app) a question, returns True or False'''
     answer = 0
-    print('account doesn\'t exist, should i create it? (Y/N)')
+    print(f'{question} (Y/N)')
     while answer != 'y' and answer != 'n':
         answer = input().lower()
     if answer == 'y':
@@ -150,11 +150,11 @@ def createConfirmationConsole():
     else:
         return False
 
-def createConfirmationTkinter():
-    '''simply asks user (Tkinter) if they want to create the account, returns True or False'''
+def questionTkinter(question = 'account doesn\'t exist, should i create it?', title = 'POPUP'):
+    '''simply asks user (Tkinter) a question, returns True or False'''
     import tkinter
     import tkinter.messagebox
-    if tkinter.messagebox.askokcancel("POPUP", "Doesn\'t exists, should we create this account?"):
+    if tkinter.messagebox.askokcancel(title, question):
         return True
     else:
         return False
@@ -184,8 +184,10 @@ class defaultConfigurations:
         if checkForAccount(account, configSettings):
             return loadAccount(account, configSettings)
         else:
-            if createConfirmationConsole():
+            if questionConsole():
                 return createAccount(account, configSettings)
+            else:
+                return False
 
     def defaultLoadingTkinter(configSettings = ['accounts/', 'False', 'testaccount', '_omac']):
         '''The default loading system without your configuration, using tkinter'''
@@ -193,7 +195,9 @@ class defaultConfigurations:
         if checkForAccount(account, configSettings):
             return loadAccount(account, configSettings)
         else:
-            if createConfirmationTkinter():
+            if questionTkinter():
                 return createAccount(account, configSettings)
+            else:
+                return False
 
 
