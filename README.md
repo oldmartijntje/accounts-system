@@ -1,56 +1,89 @@
 # accounts-system
 
 let's start with stating the obvious, you need to import it.
-drag accounts_omac.py into a folder where you are going to use it. and then put 'import accounts_omac' on the first line.
+Drag accounts_omac.py into a folder where you are going to use it. And then put 'import accounts_omac' on the first line.
 
 To test the exxampleapps, you need to copy the accounts_omac.py into that folder too
 
-# The basics:
-you have an account. and you store data on it. and view the same data in other apps. but how?
-as the exampleAppData.py shows, use: accounts_omac.createAppData() to create your data foders.
-
-# How is the Account built:
-
+## How is the Account built:
 Your account is a dict, with these keys:
 'name' 'nickname' 'time' 'versionHistory' 'appData' 'collectables' 'achievements' 'loadTime'
 
-## Name 
-name needs to always stay the same, as it's needed to store itself. tho you can change the nickname freely, hen you create an 
+### Name 
+Name needs to always stay the same, as it's needed to store itself. tho you can change the nickname freely, then you create an 
 account the nickname and name are the same
 
-## Time 
-time is used to store how long you have used the account, every seccond is noted down. u don't need to cde anything for it to 
+### Time 
+time is used to store how long you have used the account, every seccond is noted down. You don't need to cde anything for it to 
 work, just open your account as explained in the examples, and save it as explained in the examples, and it will automatically 
-work. the time is an erray/list, first place contains amount of seconds. second place is a string of the time formatted to 
+work. The time is an erray/list, first place contains amount of seconds. Second place is a string of the time formatted to 
 Hour:Minute:Seconds format.
 
-## VersionHistory 
-VersionHistory saves the history of versions of the account system the account gets logged into. this is purely for debugging 
-problems. it only stores a version if it isn't already the last one in the list.
+### VersionHistory 
+VersionHistory saves the history of versions of the account system the account gets logged into. This is purely for debugging 
+problems. It only stores a version if the version you are using is a different one than the one u used last time.
 
-## AppData 
+### AppData 
 AppData is a dict with appdata. with the accounts_omac.createAppData() it automatically adds your app to the dictionary.
 it then looks like this: data['appdata'][appIDorName] = []
 this is where you can put all the appdata you need.
 
-## Collectables 
-Collectables works the same as appdata. but i advice you to split the list: data['collectables'][appIDorName] = []
-up into 1 list and 1 dict: [[],{}] and then store the collectables in the list, and put the info about it in the dict. this
-makes it easy to load othe apps their collectables into your apps. but you don't have to, you can use it any way you want
+### Collectables 
+Collectables works the same as appdata. But i advice you to split the list: data['collectables'][appIDorName] = []
+up into 1 list and 1 dict: [[],{}] and then store the collectables in the list, and put the info about it in the dict. This
+makes it easy to load othe apps their collectables into your apps. But you don't have to, you can use it any way you want
 
-## Achievements
-achievements work the same as Collectables ^^
+### Achievements
+Achievements work the same as Collectables ^^
 
-## LoadTime
-loadTime is used to save how much time you have used the account. do not touch this. if you change it it can, and possably will, 
+### LoadTime
+LoadTime is used to save how much time you have used the account. Do not touch this. if you change it it can, and possably will, 
 break the Time stored on your account
 
 # The built in functions:
-there are a lot of built in functions, here we have the normal functions:
+There are a lot of built in functions, here we have the normal functions:
 1.configFileConsole 2.loadAccount 3.createAccount 4.saveAccount 5.checkForAccount 6.removeCharacters 7.askAccountNameConsole 
 8.askAccountNameTkinter 9.createConfirmationConsole 10.createConfirmationTkinter 11.createAppData
+To use any function, you have to put 'accounts_omac.' infront of it, like this:
+accounts_omac.configFileConsole()
 
-## 1.configFileConsole:
-this creates the config file of the account system. with things like, where to store the accounts. and autologin. this needs to 
+### 1.configFileConsole:
+This creates the config file of the account system. with things like, where to store the accounts. And autologin. this needs to 
 be in the start of any of the apps you make with this, since it cant function without it.
-it takes no arguments and it will return the settings in a list. save this list as you need it for multiple other functions.
+It takes no arguments and it will return the settings in a list. Save this list as you need it for multiple other functions.
+
+### 2.loadAccount:
+This basically loads an existing account. It takes 2 arguments: the account name. and the settings from the config file. it 
+returns the data from the account. it reads json files.
+
+### 3.createAccount:
+This basically creates an account. It overwrites the account if it already exists. it takes 2 arguments: the account name. and 
+the settings from the config file. It returns the data from the account, so you don't have to load it afterwards. It reads json 
+files.
+
+### 4.saveAccount:
+This function saves your account to a file. It also counts the time you have opened it and updates it. It also changes some data 
+because just storing it yourself isn't gonna work, cause the 'loadTime' data prevent's it from being saved, so it changes that 
+when saving it, and then fixes it again so you can keep on using the program. It takes 2 arguments: the data, and the config 
+settings. It returns the data
+
+### 5.checkForAccount:
+This is a function that checks if the account exists. This is used so you don't try to load an account when it doesn't exist, and 
+don't try to create an account when it already exists. It takes 2 arguments: the data, and the config settings. It returns a True 
+or False Boolean.
+
+### 6.removeCharacters:
+This is a support function I use in some functions to remove illegal characters from account names so that you won't try to 
+create a file that for example has a / in the name, cause that obviously won't work. It removes everything in the 
+'string.punctuation' (from the string import) and all spaces. And returns the name. It takes 1 argument: The name.
+
+### 7.askAccountNameConsole:
+This is used to tell the app what account to login to. It will just ask for an account name. It will automatically use the 
+removeCharacters() function. it takes 2 arguments: the config settings, and if you want to, custom text. It will return the 
+username.
+
+### 8.askAccountNameTkinter:
+This is the same as askAccountNameConsole() except for the fact that it uses tkinter instead of the console to ask the name.
+It takes 4 arguments: the config settings, The text on the button, The text on the label, the exampleName. If you only provide 
+the settings, it will still work since the last 3 aren't neccasery. It returns the username.
+

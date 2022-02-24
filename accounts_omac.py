@@ -102,7 +102,7 @@ def removeCharacters(name):
         name = name.replace(character, '')
     return name
 
-def askAccountNameConsole(configSettings = ['accounts/', 'False', 'testaccount', '_omac']):
+def askAccountNameConsole(configSettings = ['accounts/', 'False', 'testaccount', '_omac'], text = 'please give username\n>'):
     '''simply asks input for an account name (console app), returns account name'''
     path, autoLogin, autoLoginName, fileExtention = configSettings
     #for the autologin
@@ -111,12 +111,13 @@ def askAccountNameConsole(configSettings = ['accounts/', 'False', 'testaccount',
     else:
         username = ''
         while username == '':  
-            username = input('please give username\n>')
+            username = input(text)
             username = removeCharacters(username)
     
     return username
 
-def askAccountNameTkinter(configSettings = ['accounts/', 'False', 'testaccount', '_omac']):
+def askAccountNameTkinter(configSettings = ['accounts/', 'False', 'testaccount', '_omac'], buttonText = 'click me when you chose your name',
+                            labelText = 'input your name here', exampleName = 'exampleName'):
     '''input the account name (tkinter), returns account name'''
     import tkinter
     def click():
@@ -129,11 +130,11 @@ def askAccountNameTkinter(configSettings = ['accounts/', 'False', 'testaccount',
     else:
         window = tkinter.Tk()
         nameVar=tkinter.StringVar()
-        nameVar.set('exampleName')
-        tkinter.Label(text = 'input your name here').pack()
+        nameVar.set(exampleName)
+        tkinter.Label(text = labelText).pack()
         nameEntry = tkinter.Entry(window,textvariable = nameVar, font=('calibre',10,'normal'))
         nameEntry.pack()
-        button = tkinter.Button(window, text = 'click me when you chose your name', command = lambda: click()).pack()
+        button = tkinter.Button(window, text = buttonText, command = lambda: click()).pack()
         window.mainloop()
         username = removeCharacters(nameVar.get())
     return username
