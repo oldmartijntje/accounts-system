@@ -1,8 +1,10 @@
-version = '2.0.0'
+version = '2.1.0'
 #code made by OldMartijntje
 
-def configFileConsole():
-    '''creates or reads config file (consoleApp)'''
+def configFileConsole(pathLocation = False):
+    '''creates or reads config file (consoleApp) 
+    the argument is the path to where accounts are stored.
+    if False or not given, the program will ask for you'''
     import configparser
     import string
     import os
@@ -14,7 +16,9 @@ def configFileConsole():
             config = configparser.ConfigParser(allow_no_value=True)
             config['DEFAULT'] = {'#don\'t change the file-extention if you are not sure of what it is' : None,
                 'fileExtention' : '_omac'}
-            folder = input('do you have a specific folder where you want to store account data?\nimport the path, or not\n>')
+            if pathLocation == False:
+                folder = input('do you have a specific folder where you want to store account data?\nimport the path, or not\n>')
+            else: folder = 'accounts/'
             if os.path.isdir(folder):#check if the inputted folder exists
                 if folder[len(folder)-1] != '/' and folder[len(folder)-1] != '\\':
                     folder += '\\'
@@ -168,7 +172,6 @@ def createAppData(data, appID):
     if appID not in data['achievements']:
         data['achievements'][appID] = []
     return data
-
 
 class defaultConfigurations:
     def defaultLoadingConsole(configSettings = ['accounts/', 'False', 'testaccount', '_omac']):

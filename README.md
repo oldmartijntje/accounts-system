@@ -1,4 +1,5 @@
 # accounts-system
+# Version 2.1.0
 
 let's start with stating the obvious, you need to import it.
 Drag accounts_omac.py into a folder where you are going to use it. And then put 'import accounts_omac' on the first line.
@@ -51,6 +52,7 @@ accounts_omac.configFileConsole()
 This creates the config file of the account system. with things like, where to store the accounts. And autologin. this needs to 
 be in the start of any of the apps you make with this, since it cant function without it.
 It takes no arguments and it will return the settings in a list. Save this list as you need it for multiple other functions.
+since version 2.1 it asks for an argument, that argument is the path to where accounts are stored. if False is given or left empty, the program will ask for you.
 
 ### 2.loadAccount:
 This basically loads an existing account. It takes 2 arguments: the account name. and the settings from the config file. it 
