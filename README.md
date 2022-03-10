@@ -1,5 +1,5 @@
 # accounts-system
-# Version 2.2.0
+# Version 2.3.0
 
 let's start with stating the obvious, you need to import it.
 Drag accounts_omac.py into a folder where you are going to use it. And then put 'import accounts_omac' on the first line.
@@ -120,7 +120,14 @@ account, it will return False. Otherwise it will return the account data.
 # Easy functions:
 I also made some Easy functions. To use any of these functions, you have to put 'accounts_omac.easy.' infront of 
 it, like this: accounts_omac.easy.createPathIfNotThere()
-These are the functions: 1.createPathIfNotThere 
+These are the functions: 1.createPathIfNotThere 2.addRandomNoDuplicates
 
 ### 1.createPathIfNotThere
 This function takes 1 argument, the path. If it exists, it returns True. If it doesn't exist, it returns false and creates it.
+
+### 2.addRandomNoDuplicates
+This function takes 2-4 arguments: list, int, list, boolean boolean. The first list is a list with all possible items, for example: alphabet. The int is a number f 
+items, for example: 5. The second list is the begin list, could be empty, could also already have 3 letters of the alphabet or something. The boolean is for if you 
+want to ignore the already existing items or not. By default it will ignore it. What it does is it first checks the first list for duplicates, (same with the 
+second list depending of the boolean is set to True or False) and then it adds the amount of the numbers items from the first list and adds it to the second list. 
+If the last boolean is True, if there are no items left in the first list it will immediately return the list. if false, it will probably cause an error.
