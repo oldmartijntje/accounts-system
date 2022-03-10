@@ -1,4 +1,4 @@
-version = '2.1.0'
+version = '2.2.0'
 #code made by OldMartijntje
 
 def configFileConsole(pathLocation = False):
@@ -98,12 +98,16 @@ def checkForAccount(accountName = 'testaccount', configSettings = ['accounts/', 
     else:
         return False
 
-def removeCharacters(name):
-    '''this only keeps numbers and letters in the string you provde'''
+def removeCharacters(name, removeCharacters = []):
+    '''this only keeps numbers and letters in the string you provide, unless you give a list of characters, then it removes those characters instead'''
     import string
     name = name.replace(" ", "")
-    for character in string.punctuation:
-        name = name.replace(character, '')
+    if removeCharacters == []:
+        for character in string.punctuation:
+            name = name.replace(character, '')
+    else:
+        for character in removeCharacters:
+            name = name.replace(character, '')
     return name
 
 def askAccountNameConsole(configSettings = ['accounts/', 'False', 'testaccount', '_omac'], text = 'please give username\n>'):
@@ -196,4 +200,12 @@ class defaultConfigurations:
             else:
                 return False
 
-
+class easy:
+    def createPathIfNotThere(path):
+        '''Creates the path if it doesn't exists and returns true or false'''
+        import os
+        if os.path.isdir(path):
+            return True
+        else:   
+            os.mkdir(path)
+            return False

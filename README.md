@@ -1,5 +1,5 @@
 # accounts-system
-# Version 2.1.0
+# Version 2.2.0
 
 let's start with stating the obvious, you need to import it.
 Drag accounts_omac.py into a folder where you are going to use it. And then put 'import accounts_omac' on the first line.
@@ -78,6 +78,7 @@ or False Boolean.
 This is a support function I use in some functions to remove illegal characters from account names so that you won't try to 
 create a file that for example has a / in the name, cause that obviously won't work. It removes everything in the 
 'string.punctuation' (from the string import) and all spaces. And returns the name. It takes 1 argument: The name.
+Since 2.2.0 you can also give a list of characters for it to remove instead of the default.
 
 ### 7.askAccountNameConsole:
 This is used to tell the app what account to login to. It will just ask for an account name. It will automatically use the 
@@ -101,8 +102,8 @@ Takes 2 arguments: The question and the popup title. Default question is account
 This checks if the app already has it's own key in the 3 dicts(appdata, achievements, collectables). And when it doesn't have 
 these keys, it creates them. So you can add data to your apps.
 
-# Easy functions:
-I also made some easy functions. To use any of these functions, you have to put 'accounts_omac.defaultConfigurations.' infront of 
+# Default functions:
+I also made some Default functions. To use any of these functions, you have to put 'accounts_omac.defaultConfigurations.' infront of 
 it, like this: accounts_omac.defaultConfigurations.defaultLoadingConsole()
 These are the functions: 1.defaultLoadingConsole 2.defaultLoadingTkinter
 
@@ -112,4 +113,14 @@ for a username. It will create it if it doesn't exits, atleast if you want it to
 will return False. Otherwise it will return the account data.
 
 ### 2.defaultLoadingTkinter:
-This is a function you can call to use the account (in tkinter) when you don't want to customize anything. It runs the other commands by himself. It will ask u for a username. It will create it if it doesn't exits, atleast if you want it to create an account. If you tell it not to create an account, it will return False. Otherwise it will return the account data.
+This is a function you can call to use the account (in tkinter) when you don't want to customize anything. It runs the other commands by himself. 
+It will ask u for a username. It will create it if it doesn't exits, atleast if you want it to create an account. If you tell it not to create an 
+account, it will return False. Otherwise it will return the account data.
+
+# Easy functions:
+I also made some Easy functions. To use any of these functions, you have to put 'accounts_omac.easy.' infront of 
+it, like this: accounts_omac.easy.createPathIfNotThere()
+These are the functions: 1.createPathIfNotThere 
+
+### 1.createPathIfNotThere
+This function takes 1 argument, the path. If it exists, it returns True. If it doesn't exist, it returns false and creates it.
