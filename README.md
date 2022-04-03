@@ -1,5 +1,5 @@
 # accounts-system
-# Version 2.3.0
+# Version 2.5.0
 
 let's start with stating the obvious, you need to import it.
 Drag accounts_omac.py into a folder where you are going to use it. And then put 'import accounts_omac' on the first line.
@@ -44,7 +44,7 @@ break the Time stored on your account
 # The built in functions:
 There are a lot of built in functions, here we have the normal functions:
 1.configFileConsole 2.loadAccount 3.createAccount 4.saveAccount 5.checkForAccount 6.removeCharacters 7.askAccountNameConsole 
-8.askAccountNameTkinter 9.questionConsole 10.questionTkinter 11.createAppData
+8.askAccountNameTkinter 9.questionConsole 10.questionTkinter 11.createAppData 12.configFileTkinter 13.on_closing
 To use any of these functions, you have to put 'accounts_omac.' infront of it, like this:
 accounts_omac.configFileConsole()
 
@@ -102,6 +102,17 @@ Takes 2 arguments: The question and the popup title. Default question is account
 This checks if the app already has it's own key in the 3 dicts(appdata, achievements, collectables). And when it doesn't have 
 these keys, it creates them. So you can add data to your apps.
 
+### 12.configFileTkinter:
+This creates the config file of the account system. with things like, where to store the accounts. And autologin. this needs to 
+be in the start of any of the apps you make with this, since it cant function without it.
+It takes no arguments and it will return the settings in a list. Save this list as you need it for multiple other functions.
+since version 2.1 it asks for an argument, that argument is the path to where accounts are stored. if False is given or left empty, the program will ask for you in 
+a Tkinter window.
+
+### 13.on_closing:
+This function asks you in tkinter to confirm that you want to close the app, and if you confirm it will exit. Be aware that it won't save your account data when 
+you use it, it will liturally just close the program.
+
 # Default functions:
 I also made some Default functions. To use any of these functions, you have to put 'accounts_omac.defaultConfigurations.' infront of 
 it, like this: accounts_omac.defaultConfigurations.defaultLoadingConsole()
@@ -120,7 +131,7 @@ account, it will return False. Otherwise it will return the account data.
 # Easy functions:
 I also made some Easy functions. To use any of these functions, you have to put 'accounts_omac.easy.' infront of 
 it, like this: accounts_omac.easy.createPathIfNotThere()
-These are the functions: 1.createPathIfNotThere 2.addRandomNoDuplicates
+These are the functions: 1.createPathIfNotThere 2.addRandomNoDuplicates 3.stringToAscii
 
 ### 1.createPathIfNotThere
 This function takes 1 argument, the path. If it exists, it returns True. If it doesn't exist, it returns false and creates it.
@@ -131,3 +142,6 @@ items, for example: 5. The second list is the begin list, could be empty, could 
 want to ignore the already existing items or not. By default it will ignore it. What it does is it first checks the first list for duplicates, (same with the 
 second list depending of the boolean is set to True or False) and then it adds the amount of the numbers items from the first list and adds it to the second list. 
 If the last boolean is True, if there are no items left in the first list it will immediately return the list. if false, it will probably cause an error.
+
+### 3.stringToAscii
+This function takes 1 argument that needs to be a string, and this function returns the string turned into the ASCII values.
