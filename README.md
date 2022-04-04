@@ -1,5 +1,5 @@
 # accounts-system
-# Version 2.5.0
+# Version 2.6.0
 
 let's start with stating the obvious, you need to import it.
 Drag accounts_omac.py into a folder where you are going to use it. And then put 'import accounts_omac' on the first line.
@@ -8,7 +8,7 @@ To test the exxampleapps, you need to copy the accounts_omac.py into that folder
 
 ## How is the Account built:
 Your account is a dict, with these keys:
-'name' 'nickname' 'time' 'versionHistory' 'appData' 'collectables' 'achievements' 'loadTime'
+'name' 'nickname' 'time' 'versionHistory' 'appData' 'collectables' 'achievements' 'loadTime' 'UserID'
 
 ### Name 
 Name needs to always stay the same, as it's needed to store itself. tho you can change the nickname freely, then you create an 
@@ -21,8 +21,12 @@ work. The time is an erray/list, first place contains amount of seconds. Second 
 Hour:Minute:Seconds format.
 
 ### VersionHistory 
+Pre V2.6.0:
 VersionHistory saves the history of versions of the account system the account gets logged into. This is purely for debugging 
 problems. It only stores a version if the version you are using is a different one than the one u used last time.
+V2.6.0+ 
+This shows the highest version the account has been logged into. This is used for when there are new features added to the accounts itself and not the system. If 
+you load a newer account into pre 2.6.0 nothing catastrophical will happen. it will just try to update the account again, which the system will ignore.
 
 ### AppData 
 AppData is a dict with appdata. with the accounts_omac.createAppData() it automatically adds your app to the dictionary.
@@ -41,6 +45,10 @@ Achievements work the same as Collectables ^^
 LoadTime is used to save how much time you have used the account. Do not touch this. if you change it it can, and possably will, 
 break the Time stored on your account
 
+### UserID
+UserID is a string that is binded to your account, yes you could change it, but it's a risk, because some apps could build in a check. The reason this exists is 
+mostly for multiplayer apps. The cahnce of a UID to not be unique is 0 since it's based of datetime and your username.
+
 # The built in functions:
 There are a lot of built in functions, here we have the normal functions:
 1.configFileConsole 2.loadAccount 3.createAccount 4.saveAccount 5.checkForAccount 6.removeCharacters 7.askAccountNameConsole 
@@ -56,7 +64,7 @@ since version 2.1 it asks for an argument, that argument is the path to where ac
 
 ### 2.loadAccount:
 This basically loads an existing account. It takes 2 arguments: the account name. and the settings from the config file. it 
-returns the data from the account. it reads json files.
+returns the data from the account. it reads json files. Since 2.6.0 it will check if there is an update for your account.
 
 ### 3.createAccount:
 This basically creates an account. It overwrites the account if it already exists. it takes 2 arguments: the account name. and 
@@ -145,3 +153,8 @@ If the last boolean is True, if there are no items left in the first list it wil
 
 ### 3.stringToAscii
 This function takes 1 argument that needs to be a string, and this function returns the string turned into the ASCII values.
+
+# system functions
+There are system functions. these functons are needed to run the account system, but probably not needed for you, so i won't explain them here. But i will give you 
+a list: 1.systemFunctions.userID() 2.systemFunctions.on_closing() 3.systemFunctions.updateRequest() 4. systemFunctions.CAFU() 5.systemFunctions.checkVersion()
+They all heve descriptions of their own when you put them into your code.
