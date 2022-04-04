@@ -1,10 +1,10 @@
 
-version = '2.5.0'
+version = '2.5.1'
 #code made by OldMartijntje
 
 def on_closing(windowTitles = 'Accounts_omac_lib'):
     import tkinter.messagebox
-    if tkinter.messagebox.askokcancel(windowTitles, f"Your program will be terminated\nShould we proceed?", icon ='warning'):
+    if tkinter.messagebox.askyesno(windowTitles, f"Your program will be terminated\nShould we proceed?", icon ='warning'):
         exit()
 
 def configFileConsole(pathLocation = False):
@@ -108,7 +108,7 @@ def configFileTkinter(pathLocation = False):
         autoLoginName = config['User']['AccountName']
     except:
         import tkinter.messagebox
-        if tkinter.messagebox.askokcancel('Config Error!', 'There is a problem when we try to open your settings\nWe will close the program after you click this message away\n\nPress \'OK\' if you want us to delete the configfile (systemConfig.ini) for you,\notherwise you will have to fix it yourself', icon ='error'):
+        if tkinter.messagebox.askyesno('Config Error!', 'There is a problem when we try to open your settings\nWe will close the program after you click this message away\n\nDo you want us to delete the configfile (systemConfig.ini) for you,\notherwise you will have to fix it yourself', icon ='error'):
             os.remove("systemConfig.ini")
         exit()
     autoLoginName = autoLoginName.replace(" ", "")
