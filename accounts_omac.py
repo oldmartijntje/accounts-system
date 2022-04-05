@@ -1,5 +1,5 @@
 
-version = '2.6.1'
+version = '2.6.2'
 #code made by OldMartijntje
 
 #functions u don't need, bacause it's just to make the system work
@@ -31,7 +31,7 @@ class systemFunctions:
                 accountData['UserID'] = UID
         return accountData
 
-    def checkVersion(account_version, system_version):
+    def checkVersion(account_version, system_version = version):
         '''Check if version is lower'''
         splittedAccountVersion = account_version.split('.')
         splittedSystemVersion = system_version.split('.')
@@ -173,7 +173,7 @@ def loadAccount(accountName = 'testaccount', configSettings = ['accounts/', 'Fal
         else:
             data= dataString
         data['loadTime'] = datetime.datetime.now()
-    if systemFunctions.checkVersion(data['versionHistory'][len(data['versionHistory']) -1], version):
+    if systemFunctions.checkVersion(data['versionHistory'][len(data['versionHistory']) -1]):
         data = systemFunctions.CAFU(data)
         data['versionHistory'].append(version)
     
