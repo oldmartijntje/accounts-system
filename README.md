@@ -1,10 +1,16 @@
 # accounts-system
-# Version 2.6.1
+# Version 2.6.2
 
 let's start with stating the obvious, you need to import it.
 Drag accounts_omac.py into a folder where you are going to use it. And then put 'import accounts_omac' on the first line.
 
 To test the exxampleapps, you need to copy the accounts_omac.py into that folder too
+
+## 2.6.2 update:
+changed checkVersion(), it first needed 2 inputs, account version and system version. It now only needs the account version, but you can still give the system 
+version if you want, but that would just not be logical. It could brick you account from getting updates
+
+
 
 ## How is the Account built:
 Your account is a dict, with these keys:
