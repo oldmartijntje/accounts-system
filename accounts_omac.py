@@ -1,5 +1,5 @@
 
-version = '2.6.0'
+version = '2.6.1'
 #code made by OldMartijntje
 
 #functions u don't need, bacause it's just to make the system work
@@ -173,7 +173,7 @@ def loadAccount(accountName = 'testaccount', configSettings = ['accounts/', 'Fal
         else:
             data= dataString
         data['loadTime'] = datetime.datetime.now()
-    if systemFunctions.checkVersion(data['versionHistory'][len(data['versionHistory']) -1]):
+    if systemFunctions.checkVersion(data['versionHistory'][len(data['versionHistory']) -1], version):
         data = systemFunctions.CAFU(data)
         data['versionHistory'].append(version)
     
