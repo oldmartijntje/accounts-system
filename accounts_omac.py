@@ -1,5 +1,5 @@
 
-version = '2.6.2'
+version = '2.6.3'
 #code made by OldMartijntje
 
 #functions u don't need, bacause it's just to make the system work
@@ -8,7 +8,7 @@ class systemFunctions:
         '''Create UserID'''
         from datetime import datetime
         now = datetime.now()
-        UID = f'{easy.stringToAscii(now.strftime("%m/%d/%Y"))//(easy.stringToAscii(f"{name}")+1)}x{easy.stringToAscii(now.strftime("%H:%M:%S"))}'
+        UID = f'{easy.stringToAscii(now.strftime("%H:%M:%S"))}x{(easy.stringToAscii(f"{name}")+1)//2 +easy.stringToAscii(now.strftime("%m/%d/%Y"))}'
         return UID
 
     def on_closing():

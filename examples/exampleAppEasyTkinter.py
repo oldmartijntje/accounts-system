@@ -1,5 +1,5 @@
 import accounts_omac
-configSettings = accounts_omac.configFileConsole()
+configSettings = accounts_omac.configFileTkinter()
 data = accounts_omac.defaultConfigurations.defaultLoadingTkinter(configSettings)
 if data == False:
     exit()
