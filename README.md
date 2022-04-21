@@ -6,8 +6,8 @@ Drag accounts_omac.py into a folder where you are going to use it. And then put 
 
 To test the exxampleapps, you need to copy the accounts_omac.py into that folder too
 
-## 2.7 update:
-Tempdata, Not forcing people to update their account
+## 2.7.1 update:
+Tempdata, Not forcing people to update their account, and asks in relevent type, console or tkinter (if you tell it to)
 
 
 
@@ -74,7 +74,8 @@ since version 2.1 it asks for an argument, that argument is the path to where ac
 
 ### 2.loadAccount:
 This basically loads an existing account. It takes 2 arguments: the account name. and the settings from the config file. it 
-returns the data from the account. it reads json files. Since 2.6.0 it will check if there is an update for your account.
+returns the data from the account. it reads json files. Since 2.6.0 it will check if there is an update for your account. Since 2.7.1 will take an extra argument, 'Console'
+or 'Tkinter' which makes it so when it asks the user to update their account, it gets asked in the used way.
 
 ### 3.createAccount:
 This basically creates an account. It overwrites the account if it already exists. it takes 2 arguments: the account name. and 
