@@ -1,14 +1,14 @@
 # accounts-system
-# Version 2.7.2
+# Version 2.7.3
 
 let's start with stating the obvious, you need to import it.
 Drag accounts_omac.py into a folder where you are going to use it. And then put 'import accounts_omac' on the first line.
 
 To test the exxampleapps, you need to copy the accounts_omac.py into that folder too
 
-## 2.7.2 update:
+## 2.7.3 update:
 Tempdata, Not forcing people to update their account, and asks in relevent type, console or tkinter (if you tell it to)
-If you the location in the configfile doesn not exist, it will create the folder.
+If you the location in the configfile doesn not exist, it will create the folder. createAccount has a fix when there is something wrong with config
 
 
 
@@ -81,7 +81,7 @@ or 'Tkinter' which makes it so when it asks the user to update their account, it
 ### 3.createAccount:
 This basically creates an account. It overwrites the account if it already exists. it takes 2 arguments: the account name. and 
 the settings from the config file. It returns the data from the account, so you don't have to load it afterwards. It reads json 
-files.
+files. Since 2.7.3 will take an extra argument, 'Console' or 'Tkinter' which makes it so when there is an error with the config, it will ask in the used way if you want to delete.
 
 ### 4.saveAccount:
 This function saves your account to a file. It also counts the time you have opened it and updates it. It also changes some data 
