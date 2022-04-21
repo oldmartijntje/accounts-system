@@ -1,5 +1,5 @@
 
-version = '2.7.1'
+version = '2.7.2'
 #code made by OldMartijntje
 
 #functions u don't need, bacause it's just to make the system work
@@ -106,6 +106,10 @@ def configFileConsole(pathLocation = False):
         path = config['User']['SaveFileFolder']
         autoLogin = config['User']['AutoLogin']
         autoLoginName = config['User']['AccountName']
+        try:
+            os.mkdir(path)
+        except:
+            pass
     except:
         delete = input('The configfile is not readable, either fix it or delete it.\nWe will close this program after you press enter. \nDo you want us to delete systemConfig.ini for you? (Y/N)\n>>')
         if delete.lower() == 'y':
@@ -170,6 +174,10 @@ def configFileTkinter(pathLocation = False):
         path = config['User']['SaveFileFolder']
         autoLogin = config['User']['AutoLogin']
         autoLoginName = config['User']['AccountName']
+        try:
+            os.mkdir(path)
+        except:
+            pass
     except:
         import tkinter.messagebox
         if tkinter.messagebox.askyesno('Config Error!', 'There is a problem when we try to open your settings\nWe will close the program after you click this message away\n\nDo you want us to delete the configfile (systemConfig.ini) for you,\notherwise you will have to fix it yourself', icon ='error'):

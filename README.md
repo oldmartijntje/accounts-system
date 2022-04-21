@@ -1,13 +1,14 @@
 # accounts-system
-# Version 2.7.0
+# Version 2.7.2
 
 let's start with stating the obvious, you need to import it.
 Drag accounts_omac.py into a folder where you are going to use it. And then put 'import accounts_omac' on the first line.
 
 To test the exxampleapps, you need to copy the accounts_omac.py into that folder too
 
-## 2.7.1 update:
+## 2.7.2 update:
 Tempdata, Not forcing people to update their account, and asks in relevent type, console or tkinter (if you tell it to)
+If you the location in the configfile doesn not exist, it will create the folder.
 
 
 
