@@ -1,19 +1,19 @@
 # accounts-system
-# Version 2.6.3
+# Version 2.7.0
 
 let's start with stating the obvious, you need to import it.
 Drag accounts_omac.py into a folder where you are going to use it. And then put 'import accounts_omac' on the first line.
 
 To test the exxampleapps, you need to copy the accounts_omac.py into that folder too
 
-## 2.6.3 update:
-changed userID(), now it will actually give you a number infront of the x, and it's almost impossible to get duplicates
+## 2.7 update:
+Tempdata, Not forcing people to update their account
 
 
 
 ## How is the Account built:
 Your account is a dict, with these keys:
-'name' 'nickname' 'time' 'versionHistory' 'appData' 'collectables' 'achievements' 'loadTime' 'UserID'
+'name' 'nickname' 'time' 'versionHistory' 'appData' 'collectables' 'achievements' 'loadTime' 'UserID' 'TempData'
 
 ### Name 
 Name needs to always stay the same, as it's needed to store itself. tho you can change the nickname freely, then you create an 
@@ -53,6 +53,11 @@ break the Time stored on your account
 ### UserID
 UserID is a string that is binded to your account, yes you could change it, but it's a risk, because some apps could build in a check. The reason this exists is 
 mostly for multiplayer apps. The cahnce of a UID to not be unique is 0 since it's based of datetime and your username.
+
+### TempData
+TempData is a list of items. This is 1 variable that won't be saved. It is used for when a user doesn't want to update his account to a newer version, that adds new things. 
+for example the UserID. This way the account still adds the UserID to your account so you can still use the app, but when it saves the account, it deletes it from the 
+account.
 
 # The built in functions:
 There are a lot of built in functions, here we have the normal functions:
