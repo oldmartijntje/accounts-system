@@ -1,16 +1,21 @@
 # accounts-system
-# Version 2.7.3
+# Version 2.8.0
 
 let's start with stating the obvious, you need to import it.
 Drag accounts_omac.py into a folder where you are going to use it. And then put 'import accounts_omac' on the first line.
 
 To test the exxampleapps, you need to copy the accounts_omac.py into that folder too
 
-## 2.7.3 update:
-Tempdata, Not forcing people to update their account, and asks in relevent type, console or tkinter (if you tell it to)
-If you the location in the configfile doesn not exist, it will create the folder. createAccount has a fix when there is something wrong with config
-
-
+## 2.8.0 update:
+Option for the client to use auto login feature, which if you say you want to autologin, you will autologin, untill you update 
+your account, and then you need to re-enable it. made available with a new function to reconfigure the config file, so that you 
+can make a menu with the options in the config file in your app, and change the file.
+-made changes to:
+2.Loadaccount
+7.askAccountNameConsole
+8.askAccountNameTkinter
+-added:
+14.changeConfigFile
 
 ## How is the Account built:
 Your account is a dict, with these keys:
@@ -63,7 +68,7 @@ account.
 # The built in functions:
 There are a lot of built in functions, here we have the normal functions:
 1.configFileConsole 2.loadAccount 3.createAccount 4.saveAccount 5.checkForAccount 6.removeCharacters 7.askAccountNameConsole 
-8.askAccountNameTkinter 9.questionConsole 10.questionTkinter 11.createAppData 12.configFileTkinter 13.on_closing
+8.askAccountNameTkinter 9.questionConsole 10.questionTkinter 11.createAppData 12.configFileTkinter 13.on_closing 14.changeConfigFile
 To use any of these functions, you have to put 'accounts_omac.' infront of it, like this:
 accounts_omac.configFileConsole()
 
@@ -76,7 +81,7 @@ since version 2.1 it asks for an argument, that argument is the path to where ac
 ### 2.loadAccount:
 This basically loads an existing account. It takes 2 arguments: the account name. and the settings from the config file. it 
 returns the data from the account. it reads json files. Since 2.6.0 it will check if there is an update for your account. Since 2.7.1 will take an extra argument, 'Console'
-or 'Tkinter' which makes it so when it asks the user to update their account, it gets asked in the used way.
+or 'Tkinter' which makes it so when it asks the user to update their account, it gets asked in the used way. Since 2.8.0 takes a new argument: removeAutoLoginOnUpdate. If not given it's set to True. If this is set to True, if the account updates, it automatically removes autologin. If set to False, Autologin stays enabled (if it ever was enabled ofcoarse)
 
 ### 3.createAccount:
 This basically creates an account. It overwrites the account if it already exists. it takes 2 arguments: the account name. and 
@@ -103,12 +108,16 @@ Since 2.2.0 you can also give a list of characters for it to remove instead of t
 ### 7.askAccountNameConsole:
 This is used to tell the app what account to login to. It will just ask for an account name. It will automatically use the 
 removeCharacters() function. it takes 2 arguments: the config settings, and if you want to, custom text. It will return the 
-username.
+username. since 2.8.0 it also takes an argument 
+for an extra label, which by default asks if you want to autologin from that moment on, it also returns an extra argument, True/False, 
+based on if you selected yes or no.
 
 ### 8.askAccountNameTkinter:
 This is the same as askAccountNameConsole() except for the fact that it uses tkinter instead of the console to ask the name.
 It takes 4 arguments: the config settings, The text on the button, The text on the label, the exampleName. If you only provide 
-the settings, it will still work since the last 3 aren't neccasery. It returns the username.
+the settings, it will still work since the last 3 aren't neccasery. It returns the username. since 2.8.0 it also takes an argument 
+for an extra label, which by default asks if you want to autologin from that moment on, it also returns an extra argument, True/False, 
+based on if you selected yes or no.
 
 ### 9.questionConsole:
 This function asks the user a question. Returns True or False, depending on of they answered with Y or N. Takes 1 argument:
@@ -132,6 +141,9 @@ a Tkinter window.
 ### 13.on_closing:
 This function asks you in tkinter to confirm that you want to close the app, and if you confirm it will exit. Be aware that it won't save your account data when 
 you use it, it will liturally just close the program.
+
+### 14.changeConfigFile:
+This function takes 1 argument, the config settings. It recreates the config file with the given values, so that you can make a settings menu in your program.
 
 # Default functions:
 I also made some Default functions. To use any of these functions, you have to put 'accounts_omac.defaultConfigurations.' infront of 
