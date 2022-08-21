@@ -1,21 +1,13 @@
 # accounts-system
-# Version 2.8.0
+# Version 2.9.0
 
 let's start with stating the obvious, you need to import it.
 Drag accounts_omac.py into a folder where you are going to use it. And then put 'import accounts_omac' on the first line.
 
 To test the exxampleapps, you need to copy the accounts_omac.py into that folder too
 
-## 2.8.0 update:
-Option for the client to use auto login feature, which if you say you want to autologin, you will autologin, untill you update 
-your account, and then you need to re-enable it. made available with a new function to reconfigure the config file, so that you 
-can make a menu with the options in the config file in your app, and change the file.
--made changes to:
-2.Loadaccount
-7.askAccountNameConsole
-8.askAccountNameTkinter
--added:
-14.changeConfigFile
+## 2.9.0 update:
+If you give "NONE" as tkinterOrConsole argument in the load or create account functions, the system will try to fix the errors by itself if there are any 
 
 ## How is the Account built:
 Your account is a dict, with these keys:
@@ -81,12 +73,12 @@ since version 2.1 it asks for an argument, that argument is the path to where ac
 ### 2.loadAccount:
 This basically loads an existing account. It takes 2 arguments: the account name. and the settings from the config file. it 
 returns the data from the account. it reads json files. Since 2.6.0 it will check if there is an update for your account. Since 2.7.1 will take an extra argument, 'Console'
-or 'Tkinter' which makes it so when it asks the user to update their account, it gets asked in the used way. Since 2.8.0 takes a new argument: removeAutoLoginOnUpdate. If not given it's set to True. If this is set to True, if the account updates, it automatically removes autologin. If set to False, Autologin stays enabled (if it ever was enabled ofcoarse)
+or 'Tkinter' which makes it so when it asks the user to update their account, it gets asked in the used way. Since 2.8.0 takes a new argument: removeAutoLoginOnUpdate. If not given it's set to True. If this is set to True, if the account updates, it automatically removes autologin. If set to False, Autologin stays enabled (if it ever was enabled ofcoarse) Since 2.9.0 you can give "NONE" instead of 'Console' or 'Tkinter' if you want the system to try and fix itself.
 
 ### 3.createAccount:
 This basically creates an account. It overwrites the account if it already exists. it takes 2 arguments: the account name. and 
 the settings from the config file. It returns the data from the account, so you don't have to load it afterwards. It reads json 
-files. Since 2.7.3 will take an extra argument, 'Console' or 'Tkinter' which makes it so when there is an error with the config, it will ask in the used way if you want to delete.
+files. Since 2.7.3 will take an extra argument, 'Console' or 'Tkinter' which makes it so when there is an error with the config, it will ask in the used way if you want to delete. Since 2.9.0 you can give "NONE" instead of 'Console' or 'Tkinter' if you want the system to try and fix itself.
 
 ### 4.saveAccount:
 This function saves your account to a file. It also counts the time you have opened it and updates it. It also changes some data 
