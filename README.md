@@ -1,10 +1,13 @@
 # accounts-system
-# Version 2.9.0
+# Version 2.9.1
 
 let's start with stating the obvious, you need to import it.
 Drag accounts_omac.py into a folder where you are going to use it. And then put 'import accounts_omac' on the first line.
 
 To test the exxampleapps, you need to copy the accounts_omac.py into that folder too
+
+## 2.9.1:
+The way the user ID get's generated is different, so that the chance of getting a duplicate is umpossible without people using the same account.
 
 ## 2.9.0 update:
 If you give "NONE" as tkinterOrConsole argument in the load or create account functions, the system will try to fix the errors by itself if there are any 
